@@ -1,0 +1,1 @@
+export 'tutorial_video_model.dart';
