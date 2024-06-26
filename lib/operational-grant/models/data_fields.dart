@@ -9,7 +9,6 @@ enum OGDataField{
   phoneNumber,
   email,
   bvn,
-  nin,
   idDocument,
   ownerPassportPhotoUrl,
   address,
@@ -79,7 +78,6 @@ List<OGDataField> oGFieldsForNewRecords = [
   OGDataField.gender,
   OGDataField.phone,
   OGDataField.bvn,
-  OGDataField.nin,
 
   OGDataField.idDocType,
   OGDataField.idDocPhotoUrl,
@@ -170,7 +168,6 @@ List<List<OGDataField>> oGDatabaseFieldsPages = [
     OGDataField.gender,
     OGDataField.phone,
     OGDataField.bvn,
-    OGDataField.nin,
     OGDataField.email,
     OGDataField.homeAddress,
     OGDataField.civilServant,

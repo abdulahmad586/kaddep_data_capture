@@ -113,21 +113,6 @@ class PersonalInformationFragment extends StatelessWidget{
                   height: 15,
                 ),
                 AppTextField(
-                  validator: (text) => text == null || text.isEmpty
-                      ? "Field is required"
-                      : (text.length != 11
-                      ? "Please enter a valid NIN"
-                      : null),
-                  labelText: "NIN",
-                  keyboardType: TextInputType.phone,
-                  onChange: (s) =>
-                      cubitContext.read<OGDataEntryCubit>().updateValue(OGDataField.nin, s),
-                  initialValue: OGDataEntryState.getPageOGDataField(snapshot.data as Map<String, Object?>,OGDataField.nin) as String?,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                AppTextField(
                   validator: (text) =>
                   text == null || text.isEmpty ? "Field is required" : null,
                   labelText: "Home address",

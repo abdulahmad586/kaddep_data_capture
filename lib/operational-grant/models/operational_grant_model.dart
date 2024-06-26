@@ -168,7 +168,6 @@ class OperationalGrantSchema {
   final String phone;
   final String email;
   final String bvn;
-  final String nin;
   final String homeAddress;
   final bool civilServant;
   final Uint8List ownerPassportPhotoUrl;
@@ -218,7 +217,6 @@ class OperationalGrantSchema {
     required this.phone,
     required this.email,
     required this.bvn,
-    required this.nin,
     required this.homeAddress,
     required this.civilServant,
     required this.businessName,
@@ -310,7 +308,6 @@ class OperationalGrantSchema {
       phone: map['phone'] ?? map['phoneNumber'],
       email: map['email'] ?? "",
       bvn: map['bvn'],
-      nin: map['nin'],
       homeAddress: map['homeAddress'] ?? map['address'],
       civilServant: (map["civilServant"] ?? map['isCivilServant']) == "Yes"
           ? true
@@ -379,7 +376,6 @@ class OperationalGrantSchema {
       'gender': gender,
       'phoneNumber': phone,
       'bvn': bvn,
-      'nin': nin,
       'idDocument': {
         'idDocType': idDocType,
         'idDocPhotoUrl': await FileUtils.blobToBase64(idDocPhotoUrl),

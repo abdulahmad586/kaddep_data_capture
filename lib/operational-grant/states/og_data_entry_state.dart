@@ -220,7 +220,6 @@ Map<int,List<OGDataField>> pageOGDataFields = {
     OGDataField.gender,
     OGDataField.phone,
     OGDataField.email,
-    OGDataField.nin,
     OGDataField.homeAddress,
     OGDataField.civilServant,
   ],
