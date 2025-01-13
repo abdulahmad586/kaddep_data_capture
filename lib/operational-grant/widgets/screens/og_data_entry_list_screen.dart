@@ -36,7 +36,7 @@ class DataEntryListPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(child: RegisteredSMEs(cardColor: Colors.orange[800],), onTap: () {
+                        GestureDetector(child: RegisteredSMEs(value:(listState.unsyncedDataCount??0)+(listState.syncedDataCount??0), cardColor: Colors.orange[800],), onTap: () {
 
                         },),
                         Expanded(

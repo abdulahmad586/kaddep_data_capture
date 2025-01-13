@@ -166,9 +166,9 @@ class OperationalGrantSchema {
   final DateTime dob;
   final String gender;
   final String phone;
-  final String email;
+  final String? email;
   final String bvn;
-  final String nin;
+  final String? nin;
   final String homeAddress;
   final bool civilServant;
   final Uint8List ownerPassportPhotoUrl;
@@ -269,7 +269,7 @@ class OperationalGrantSchema {
       'phone': phone,
       'email': email,
       'bvn': bvn,
-      // 'nin': nin,
+      'nin': nin,
       'homeAddress': homeAddress,
       'civilServant': civilServant,
       'businessName': businessName,
@@ -308,7 +308,7 @@ class OperationalGrantSchema {
       dob: DateTime.tryParse(map['dob']) ?? parseMyDate(map['dob'])!,
       gender: map['gender'],
       phone: map['phone'] ?? map['phoneNumber'],
-      email: map['email'] ?? "",
+      email: map['email'],
       bvn: map['bvn'],
       nin: map['nin'],
       homeAddress: map['homeAddress'] ?? map['address'],

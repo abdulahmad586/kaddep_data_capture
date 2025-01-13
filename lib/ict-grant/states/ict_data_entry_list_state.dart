@@ -60,9 +60,9 @@ class ICTDataEntryListCubit extends Cubit<ICTDataEntryListState> {
           loadSyncStats().then((value) => loadData(refresh:true));
           break;
         }
-      }catch(e){
+      }catch(e,stack){
         emit(state.copyWith(syncError: e.toString(), syncing: false));
-        print(e);
+        print(stack);
         break;
       }
     }

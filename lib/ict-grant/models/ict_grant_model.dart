@@ -161,9 +161,9 @@ class ICTGrantSchema {
   final DateTime dob;
   final String gender;
   final String phone;
-  final String email;
+  final String? email;
   final String bvn;
-  final String nin;
+  final String? nin;
   final String homeAddress;
   final bool civilServant;
   final Uint8List ownerPassportPhotoUrl;
@@ -188,9 +188,6 @@ class ICTGrantSchema {
   final String complPurchase2;
   final String complPurchase3;
   final int costOfItems;
-  final Uint8List? renumerationPhotoUrl;
-  final Uint8List? groupPhotoUrl;
-  final String? comment;
   final String bank;
   final String accountNumber;
   final String accountName;
@@ -235,9 +232,6 @@ class ICTGrantSchema {
     required this.accountName,
     required this.taxId,
     required this.taxRegPhotoUrl,
-    required this.comment,
-    required this.groupPhotoUrl,
-    required this.renumerationPhotoUrl,
     required this.cacProofDocPhotoUrl,
     required this.certPhotoUrl,
     required this.catType,
@@ -303,7 +297,7 @@ class ICTGrantSchema {
       dob: DateTime.tryParse(map['dob']) ?? parseMyDate(map['dob'])!,
       gender: map['gender'],
       phone: map['phone'] ?? map['phoneNumber'],
-      email: map['email'] ?? "",
+      email: map['email'],
       bvn: map['bvn'],
       nin: map['nin'],
       homeAddress: map['homeAddress'] ?? map['address'],
@@ -342,9 +336,6 @@ class ICTGrantSchema {
       idDocPhotoUrl: map['idDocPhotoUrl'],
       ownerAtBusinessPhotoUrl: map['ownerAtBusinessPhotoUrl'],
       certPhotoUrl: map['certPhotoUrl'],
-      renumerationPhotoUrl: map['renumerationPhotoUrl'],
-      groupPhotoUrl: map['groupPhotoUrl'],
-      comment: map['comment'] ?? "",
       taxRegPhotoUrl: map['taxRegPhotoUrl'],
       updatedAt:
       DateTime.parse(map['updatedAt'] ?? DateTime.now().toIso8601String()),
@@ -397,20 +388,7 @@ class ICTGrantSchema {
       'yearsInOperation': yearsInOperation,
       'numStaff': numStaff,
       'ictProcCat': ictProcCat,
-      'itemsPurchased': ictProcCat != "Salary"
-          ? await ItemsPurchased.toMapArray(itemsPurchased)
-          : null,
-      'salaryRenum': ictProcCat == "Salary"
-          ? {
-        'groupPhotoUrl': groupPhotoUrl == null
-            ? null
-            : await FileUtils.blobToBase64(groupPhotoUrl!),
-        'renumerationPhotoUrl': renumerationPhotoUrl == null
-            ? null
-            : await FileUtils.blobToBase64(renumerationPhotoUrl!),
-        'comment': comment,
-      }
-          : null,
+      'itemsPurchased': await ItemsPurchased.toMapArray(itemsPurchased),
       'costOfItems': costOfItems,
       'bank': bank,
       'accountNumber': accountNumber,

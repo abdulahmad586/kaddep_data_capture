@@ -41,7 +41,7 @@ class BusinessRegistrationFragment extends StatelessWidget{
                       labelText: "Business registration issuer",
                       keyboardType: TextInputType.name,
                       enableSearch: false,
-                      list: const  ['CAC', 'SMEDAN', 'Cooperative Assoc.', 'KADEDA'],
+                      list: const  ['CAC', 'SMEDAN', 'Cooperative Assoc.'/*, 'KADEDA'*/],
                       initialValue: issuer,
                       onChanged: (s) => cubitContext.read<OGDataEntryCubit>().updateValue(
                           OGDataField.businessRegIssuer, s is String ? s : (s as DropDownValueModel).name),

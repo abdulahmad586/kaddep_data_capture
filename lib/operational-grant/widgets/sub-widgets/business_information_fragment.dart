@@ -54,8 +54,8 @@ class BusinessInformationFragment extends StatelessWidget{
                     ),
                     AppTextField(
                       validator: (text) =>
-                      text == null || text.isEmpty ? "Field is required" : (int.tryParse(text) ==null || text.length > 2 ? "Invalid number": null),
-                      labelText: "Years in operation",
+                      text == null || text.isEmpty ? "Field is required" : (int.tryParse(text) ==null || text.length > 2 || int.parse(text) > 20 ? "Invalid number": null),
+                      labelText: "Number of years in operation",
                       keyboardType: TextInputType.number,
                       onChange: (s) =>
                           cubitContext.read<OGDataEntryCubit>().updateValue(
@@ -78,7 +78,7 @@ class BusinessInformationFragment extends StatelessWidget{
                               s.isNotEmpty ? int.parse(s) : 0),
                       initialValue:
                       OGDataEntryState.getPageOGDataField(snapshot.data as Map<String, Object?>,OGDataField.numStaff)
-                          ?.toString() ?? "1",
+                          ?.toString(),
                     ),
                     const SizedBox(
                       height: 15,

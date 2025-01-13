@@ -50,7 +50,7 @@ class BusinessExpensesFragment extends StatelessWidget{
                       labelText: "Business operations expense category",
                       keyboardType: TextInputType.name,
                       enableSearch: false,
-                      list: const  ['Salary', 'Rent', 'Utilities', 'Raw Materials'],
+                      list: const  ['Salary', 'Rent', 'Utilities'/*, 'Raw Materials'*/],
                       initialValue: expenseCat,
                       onChanged: (s) => cubitContext.read<OGDataEntryCubit>().updateValue(
                           OGDataField.businessOpsExpenseCat, s is String ? s : (s as DropDownValueModel).name),

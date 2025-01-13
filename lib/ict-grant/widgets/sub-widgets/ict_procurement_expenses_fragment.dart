@@ -50,7 +50,7 @@ class ICTProcurementExpensesFragment extends StatelessWidget{
                       labelText: "ICT procurement expense category",
                       keyboardType: TextInputType.name,
                       enableSearch: false,
-                      list: const  ['Salary', 'Rent', 'Utilities', 'Raw Materials'],
+                      list: const  ['Hardware', 'Software', 'Cloud computing'],
                       initialValue: expenseCat,
                       onChanged: (s) => cubitContext.read<ICTDataEntryCubit>().updateValue(
                           ICTDataField.ictProcCat, s is String ? s : (s as DropDownValueModel).name),
@@ -58,7 +58,7 @@ class ICTProcurementExpensesFragment extends StatelessWidget{
                     const SizedBox(
                       height: 15,
                     ),
-                    if(expenseCat != "Salary")Wrap( spacing: 10, children: List.generate(itemsPurchased.length+1, (index) {
+                    Wrap( spacing: 10, children: List.generate(itemsPurchased.length+1, (index) {
                       if(index ==0){
                         return GestureDetector(
                           onTap: (){
@@ -78,39 +78,8 @@ class ICTProcurementExpensesFragment extends StatelessWidget{
                         },);
                       }
                     }),),
-
-                    if(expenseCat == "Salary")const SizedBox(height: 10),
-                    if(expenseCat == "Salary")ImageBlobPickZone(
-                        ICTDataEntryState.getPageICTDataField(snapshot.data as Map<String, Object?>,ICTDataField.renumerationPhotoUrl)
-                        as Uint8List?, (path) async {
-                      cubitContext.read<ICTDataEntryCubit>().updateValue(
-                          ICTDataField.renumerationPhotoUrl, await FileUtils.imageToBlob(path));
-                    }, fieldLabel: "Salary Remuneration (Payroll) Image", isDocument: true),
-                    if(expenseCat == "Salary")const SizedBox(
-                      height: 15,
-                    ),
-                    if(expenseCat == "Salary")ImageBlobPickZone(
-                        ICTDataEntryState.getPageICTDataField(snapshot.data as Map<String, Object?>,ICTDataField.groupPhotoUrl)
-                        as Uint8List?, (path) async {
-                      cubitContext.read<ICTDataEntryCubit>().updateValue(
-                          ICTDataField.groupPhotoUrl, await FileUtils.imageToBlob(path));
-                    }, fieldLabel: "Staff Group Picture With Owner",),
-                    if(expenseCat == "Salary")const SizedBox(
-                      height: 15,
-                    ),
-                    if(expenseCat == "Salary")AppTextField(
-                      key: GlobalKey(),
-                      labelText: "Salary remarks/observation",
-                      minLines: 3,
-                      maxLines: 3,
-                      keyboardType: TextInputType.text,
-                      initialValue: ICTDataEntryState.getPageICTDataField(snapshot.data as Map<String, Object?>,ICTDataField.comment) as String?,
-                      onChange: (s) => cubitContext
-                          .read<ICTDataEntryCubit>()
-                          .updateValue(ICTDataField.comment, s),
-                    ),
                     const SizedBox(
-                      height:10
+                      height: 15,
                     ),
                     AppTextField(
                       validator: (text) =>

@@ -298,7 +298,7 @@ class OGDataEntryPage extends StatelessWidget {
                           if (state.isOnlineMode ?? false) {
                             final recordId = cubitContext?.read<OGDataEntryCubit>().state.regId;
                             if(recordId !=null){
-                              NavUtils.navToReplace(context, SyncRecordPage(recordId));
+                              NavUtils.navToReplace(context, SyncOGRecordPage(recordId));
                             }else{
                               Alert.toast(context, message: "Something went wrong, please reload this page.");
                             }

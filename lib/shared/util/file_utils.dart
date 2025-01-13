@@ -15,6 +15,7 @@ class FileUtils{
   static Future<String> blobToBase64(Uint8List fileBlob) async {
     // fileBlob = await FlutterImageCompress.compressWithList(fileBlob, quality: 75);
     return 'data:image/jpeg;base64,${base64Encode(fileBlob)}';
+    // return 'data:image/jpeg;base64,${base64Encode(fileBlob).substring(0,15)}';
   }
 
   static Uint8List base64ToBlob(String fileBase64){

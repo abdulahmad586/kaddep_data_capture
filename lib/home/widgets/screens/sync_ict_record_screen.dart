@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kaddep_data_capture/operational-grant/operational-grant.dart';
+import 'package:kaddep_data_capture/ict-grant/ict-grant.dart';
 
 import 'package:kaddep_data_capture/shared/shared.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
-class SyncRecordPage extends StatelessWidget {
+class SyncICTRecordPage extends StatelessWidget {
   final int rid;
-  const SyncRecordPage(this.rid,{Key? key}) : super(key: key);
+  const SyncICTRecordPage(this.rid,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_)=> OGDataSyncCubit(rid, OGDataSyncState()),
-      child: BlocBuilder<OGDataSyncCubit,OGDataSyncState>(
+      create: (_)=> ICTDataSyncCubit(rid, ICTDataSyncState()),
+      child: BlocBuilder<ICTDataSyncCubit,ICTDataSyncState>(
         builder: (context,state){
           return BaseScaffold(
             noGradient: true,
@@ -86,7 +86,7 @@ class SyncRecordPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width-100,
                       label: "CONTINUE",
                       onPressed: () {
-                        context.read<OGDataSyncCubit>().syncRecord(context.read<AppCubit>().user!.id);
+                        context.read<ICTDataSyncCubit>().syncRecord(context.read<AppCubit>().user!.id,()=> Navigator.pop(context));
                       },
                     ),
                   ),

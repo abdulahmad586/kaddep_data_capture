@@ -19,13 +19,15 @@ class OGDataSyncCubit extends Cubit<OGDataSyncState> {
     }
   }
 
-  void syncRecord(String userId) async{
+  void syncRecord(String userId, Function() onSuccess) async{
 
     try {
+      if(state.synced??false) throw "Record is already synced";
       emit(state.copyWith(syncing: true, statusText: "Syncing record to the server", error: ""));
       await _dataEntryService.syncData(model: state.data!, userId: userId, onSendProgress:syncProgressListener);
       await _offlineRepository.updateStatusSynched(regId);
       emit(state.copyWith(syncing: false, statusText: "Record synced!", error: "", synced: true));
+      Future.delayed(const Duration(milliseconds: 500), onSuccess);
     }catch(e){
       emit(state.copyWith(syncing: false,
           statusText: "",

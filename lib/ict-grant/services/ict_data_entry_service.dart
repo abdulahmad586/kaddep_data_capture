@@ -9,7 +9,7 @@ class ICTDataEntryService {
 
   Future<ICTGrantSchema> syncData(
       {required ICTGrantSchema model, required String userId, Function(int, int)? onSendProgress}) async {
-    const endpoint = ApiConstants.postUploadOpsGrant;
+    const endpoint = ApiConstants.postUploadICTGrant;
     try {
 
       final mapWithBase64 = await model.toMapForSync();

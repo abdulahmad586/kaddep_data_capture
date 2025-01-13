@@ -129,19 +129,47 @@ class BVNLookup extends StatelessWidget {
                             const SizedBox(height:10),
                             AppTextButton(label: "New Record", buttonColor:Theme.of(context).primaryColor, textColor:Colors.white, onPressed: ()async {
                               if(state.grantType == GrantType.ict){
-                                context.showAppDialog(title: "Coming soon", message: "Sorry this grant type is not yet available");
-                                return;
-                              }
+                                if (!(bvnFormKey.currentState?.validate() ??
+                                    false)) return;
+                                String lga = context
+                                    .read<SettingsCubit>()
+                                    .state
+                                    .captureLga ?? "";
+                                String lgaCode = context
+                                    .read<SettingsCubit>()
+                                    .state
+                                    .captureLgaCode ?? "";
+                                String ward = state.ward ?? "";
 
-                              if (!(bvnFormKey.currentState?.validate() ?? false)) return;
-                              String lga = context.read<SettingsCubit>().state.captureLga ?? "";
-                              String lgaCode = context.read<SettingsCubit>().state.captureLgaCode ?? "";
-                              String ward = state.ward ?? "";
+                                final recordId = await context.read<
+                                    BVNLookupCubit>().addNewICTRecord(
+                                    bvn.text, lga, lgaCode, ward);
+                                bvn.clear();
+                                if (context.mounted) {
+                                  NavUtils.navTo(context, ICTDataEntryPage(
+                                    existingRecordId: recordId,));
+                                }
+                              }else {
+                                if (!(bvnFormKey.currentState?.validate() ??
+                                    false)) return;
+                                String lga = context
+                                    .read<SettingsCubit>()
+                                    .state
+                                    .captureLga ?? "";
+                                String lgaCode = context
+                                    .read<SettingsCubit>()
+                                    .state
+                                    .captureLgaCode ?? "";
+                                String ward = state.ward ?? "";
 
-                              final recordId = await context.read<BVNLookupCubit>().addNewRecord(bvn.text, lga, lgaCode, ward);
-                              bvn.clear();
-                              if(context.mounted ){
-                                NavUtils.navTo(context, OGDataEntryPage(existingRecordId: recordId,));
+                                final recordId = await context.read<
+                                    BVNLookupCubit>().addNewRecord(
+                                    bvn.text, lga, lgaCode, ward);
+                                bvn.clear();
+                                if (context.mounted) {
+                                  NavUtils.navTo(context, OGDataEntryPage(
+                                    existingRecordId: recordId,));
+                                }
                               }
                               },
                             ),

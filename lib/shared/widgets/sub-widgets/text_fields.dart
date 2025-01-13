@@ -178,6 +178,8 @@ class AppTextDateField extends StatelessWidget {
           materialDatePickerInitialDate: DateTime.now(),
           materialDatePickerLastDate: DateTime(2099),
           preferredDateFormat: DateFormat('yyyy-MM-dd'),
+          textfieldDatePickerMargin: EdgeInsets.symmetric(vertical: 10),
+          textfieldDatePickerPadding: EdgeInsets.zero,
           textfieldDatePickerController: ctrl,
           validator: validator,
           onEditingComplete: onEditingComplete,

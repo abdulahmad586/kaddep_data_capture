@@ -65,15 +65,28 @@ class BVNLookupCubit extends Cubit<BVNLookupState> {
   }
 
   updateLGAAndWard(int id, String lga, String lgaCode, String ward)async{
-    await Future.wait([
-      _ogRepository.updateDataField(id, OGDataField.businessLGA.name, lga),
-      _ogRepository.updateDataField(id, OGDataField.businessLGACode.name, lgaCode),
-      _ogRepository.updateDataField(id, OGDataField.businessWard.name, ward),
-    ]);
+    if(state.grantType == GrantType.operational){
+      await Future.wait([
+        _ogRepository.updateDataField(id, OGDataField.businessLGA.name, lga),
+        _ogRepository.updateDataField(id, OGDataField.businessLGACode.name, lgaCode),
+        _ogRepository.updateDataField(id, OGDataField.businessWard.name, ward),
+      ]);
+    }else{
+      await Future.wait([
+        _ictRepository.updateDataField(id, ICTDataField.businessLGA.name, lga),
+        _ictRepository.updateDataField(id, ICTDataField.businessLGACode.name, lgaCode),
+        _ictRepository.updateDataField(id, ICTDataField.businessWard.name, ward),
+      ]);
+    }
   }
 
   Future<int> addNewRecord(String bvn, String lga, String lgaCode, String ward) async{
     final id = await _ogRepository.addEmptyRecord(bvn,OGDataType.newData, lga, lgaCode, ward);
+    return id;
+  }
+
+  Future<int> addNewICTRecord(String bvn, String lga, String lgaCode, String ward) async{
+    final id = await _ictRepository.addEmptyRecord(bvn,ICTDataType.newData, lga, lgaCode, ward);
     return id;
   }
   
